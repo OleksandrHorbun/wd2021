@@ -117,259 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/cart.js":[function(require,module,exports) {
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+})({"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function addToCart(event) {
-  var id = event.target.id;
-  var cart = JSON.parse(localStorage.getItem("cart")) || {};
-
-  if (id in cart) {
-    cart[id] += 1;
-  } else {
-    cart[id] = 1;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
+  return bundleURL;
 }
 
-function addClickEventsButtons() {
-  var buttons = document.querySelectorAll('.goods__container__item__button');
-
-  var _iterator = _createForOfIteratorHelper(buttons),
-      _step;
-
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var button = _step.value;
-      button.addEventListener("click", addToCart);
-    }
+    throw new Error();
   } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
-}
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
 
-function getCartData() {
-  var goods = JSON.parse(localStorage.getItem("goods"));
-  var cart = JSON.parse(localStorage.getItem("cart"));
-  var container = document.getElementById("cart__list");
-  var list = '';
-  var total = 0;
-
-  for (var id in cart) {
-    var item = void 0;
-
-    var _iterator2 = _createForOfIteratorHelper(goods),
-        _step2;
-
-    try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var good = _step2.value;
-
-        if (good.id == id) {
-          item = good;
-        }
-      }
-    } catch (err) {
-      _iterator2.e(err);
-    } finally {
-      _iterator2.f();
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
-
-    total += item.price * cart[id];
-    list += "<div class=\"cart__list__item\" id=\"".concat(id, "\">\n                <img src=\"").concat(item.img, "\" alt=\"\" class=\"cart__list__item__img\">\n                <div class=\"cart__list__item__text\">\n                    <p class=\"cart__list__item__name\">\n                        ").concat(item.name, "\n                    </p>\n                    <p class=\"cart__list__item__price\">\n                        ").concat(item.price * cart[id], "  \n                    </p>\n                </div>\n                <div class=\"cart__list__item__amount-cnt\">\n                    <p class=\"cart__list__item__add\">+</p>\n                    <p class=\"cart__list__item__amount\">").concat(cart[id], "</p>\n                    <p class=\"cart__list__item__remove\">-</p>\n                </div>\n                <div class=\"cart__list__item__delete\">X</div>\n            </div>");
   }
 
-  list += "<div class=\"cart__list__total\">\n            Summary: \n            <p class=\"cart__list__total__text\">".concat(total, "</p>\n            </div>\n            <a href=\"order.html\"><button class=\"cart__list__button\">\n                Buy now\n            </button></a>");
-  container.innerHTML = list;
-  localStorage.setItem("total", String(total));
+  return '/';
 }
 
-function addClickEventsRemove() {
-  var buttons = document.querySelectorAll(".cart__list__item__remove");
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
 
-  var _iterator3 = _createForOfIteratorHelper(buttons),
-      _step3;
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
 
-  try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var button = _step3.value;
-      button.addEventListener("click", removeOneFromCart);
-    }
-  } catch (err) {
-    _iterator3.e(err);
-  } finally {
-    _iterator3.f();
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
   }
-}
 
-function addClickEventsAdd() {
-  var buttons = document.querySelectorAll(".cart__list__item__add");
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
 
-  var _iterator4 = _createForOfIteratorHelper(buttons),
-      _step4;
-
-  try {
-    for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-      var button = _step4.value;
-      button.addEventListener("click", addOneToCart);
-    }
-  } catch (err) {
-    _iterator4.e(err);
-  } finally {
-    _iterator4.f();
-  }
-}
-
-function removeOneFromCart(event) {
-  var item = event.target.parentNode.parentNode;
-  var amount = event.target.parentNode.children[1];
-  var id = item.id;
-  var cart = JSON.parse(localStorage.getItem("cart"));
-
-  for (var key in cart) {
-    if (key == id) {
-      if (!(cart[id] == 1)) {
-        cart[id] -= 1;
-        removeOnePrice(item);
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
       }
     }
-  }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  amount.innerHTML = cart[id];
+    cssTimeout = null;
+  }, 50);
 }
 
-function addOneToCart(event) {
-  var item = event.target.parentNode.parentNode;
-  var amount = event.target.parentNode.children[1];
-  var id = item.id;
-  var cart = JSON.parse(localStorage.getItem("cart"));
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"scss/style.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
 
-  for (var key in cart) {
-    if (key == id) {
-      cart[id] += 1;
-      addOnePrice(item);
-    }
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  amount.innerHTML = cart[id];
-}
-
-function addClickEventsDelete() {
-  var buttons = document.querySelectorAll(".cart__list__item__delete");
-
-  var _iterator5 = _createForOfIteratorHelper(buttons),
-      _step5;
-
-  try {
-    for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-      var button = _step5.value;
-      button.addEventListener("click", deleteFromCart);
-    }
-  } catch (err) {
-    _iterator5.e(err);
-  } finally {
-    _iterator5.f();
-  }
-}
-
-function deleteFromCart(event) {
-  var item = event.target.parentNode;
-  var price = item.querySelector('.cart__list__item__price').innerHTML;
-  var id = item.id;
-  var cart = JSON.parse(localStorage.getItem("cart"));
-
-  for (var key in cart) {
-    if (key == id) {
-      delete cart[key];
-      removePriceFromTotal(price);
-    }
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  document.getElementById(id).remove();
-}
-
-function addOnePrice(item) {
-  var id = item.id;
-  var price = item.querySelector('.cart__list__item__price');
-  var goods = JSON.parse(localStorage.getItem("goods"));
-
-  var _iterator6 = _createForOfIteratorHelper(goods),
-      _step6;
-
-  try {
-    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-      var good = _step6.value;
-
-      if (good.id == id) {
-        var sum = Number(price.innerHTML) + good.price;
-        price.innerHTML = sum;
-        addPriceToTotal(good.price);
-      }
-    }
-  } catch (err) {
-    _iterator6.e(err);
-  } finally {
-    _iterator6.f();
-  }
-}
-
-function removeOnePrice(item) {
-  var id = item.id;
-  var price = item.querySelector('.cart__list__item__price');
-  var goods = JSON.parse(localStorage.getItem("goods"));
-
-  var _iterator7 = _createForOfIteratorHelper(goods),
-      _step7;
-
-  try {
-    for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-      var good = _step7.value;
-
-      if (good.id == id) {
-        var sum = Number(price.innerHTML) - good.price;
-        price.innerHTML = sum;
-        removePriceFromTotal(good.price);
-      }
-    }
-  } catch (err) {
-    _iterator7.e(err);
-  } finally {
-    _iterator7.f();
-  }
-}
-
-function addPriceToTotal(price) {
-  var total = localStorage.getItem("total");
-  var totalContainer = document.querySelector('.cart__list__total__text');
-  var sum = Number(total) + price;
-  totalContainer.innerHTML = sum;
-  localStorage.setItem("total", String(sum));
-}
-
-function removePriceFromTotal(price) {
-  var total = localStorage.getItem("total");
-  var totalContainer = document.querySelector('.cart__list__total__text');
-  var sum = Number(total) - price;
-  totalContainer.innerHTML = sum;
-  localStorage.setItem("total", String(sum));
-}
-
-addClickEventsButtons();
-getCartData();
-addClickEventsRemove();
-addClickEventsAdd();
-addClickEventsDelete();
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -573,5 +393,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/cart.js"], null)
-//# sourceMappingURL=/cart.c18a2f96.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js"], null)
+//# sourceMappingURL=/style.a6dae8f7.js.map

@@ -117,7 +117,46 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"js/cart.js":[function(require,module,exports) {
+})({"js/goods.js":[function(require,module,exports) {
+var goods = [{
+  id: 1,
+  name: "BLACK book",
+  price: 30,
+  img: "img/goods_item1.jpg"
+}, {
+  id: 2,
+  name: "BLUE book",
+  price: 100,
+  img: "img/goods_item2.jpg"
+}, {
+  id: 3,
+  name: "GREEN book",
+  price: 200,
+  img: "img/goods_item3.jpg"
+}, {
+  id: 4,
+  name: "PURPLE book",
+  price: 500,
+  img: "img/goods_item4.jpg"
+}, {
+  id: 5,
+  name: "RED book",
+  price: 45,
+  img: "img/goods_item5.jpg"
+}, {
+  id: 6,
+  name: "YELLOW book",
+  price: 120,
+  img: "img/goods_item7.jpg"
+}];
+localStorage.setItem("goods", JSON.stringify(goods));
+var goodsContainer = document.getElementById("goods__container");
+var list = "";
+goods.forEach(function (item) {
+  list += "<div class=\"goods__container__item\">\n    <img class=\"goods__container__item__img\" src=\"".concat(item.img, "\" alt=\"\">\n    <p class=\"goods__container__item__name\">\n        ").concat(item.name, "\n    </p>\n    <p class=\"goods__container__item__price\">\n        \u20B4 ").concat(item.price, "\n    </p>\n    <button class=\"goods__container__item__button\" id=\"").concat(item.id, "\">Buy</button>\n    </div>");
+});
+goodsContainer.innerHTML = list;
+},{}],"js/cart.js":[function(require,module,exports) {
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -369,7 +408,88 @@ getCartData();
 addClickEventsRemove();
 addClickEventsAdd();
 addClickEventsDelete();
-},{}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../node_modules/boxicons/css/boxicons.min.css":[function(require,module,exports) {
+
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+},{"./..\\fonts\\boxicons.eot":[["boxicons.0dca1d21.eot","../node_modules/boxicons/fonts/boxicons.eot"],"../node_modules/boxicons/fonts/boxicons.eot"],"./..\\fonts\\boxicons.woff2":[["boxicons.7a075b4b.woff2","../node_modules/boxicons/fonts/boxicons.woff2"],"../node_modules/boxicons/fonts/boxicons.woff2"],"./..\\fonts\\boxicons.woff":[["boxicons.098faa5e.woff","../node_modules/boxicons/fonts/boxicons.woff"],"../node_modules/boxicons/fonts/boxicons.woff"],"./..\\fonts\\boxicons.ttf":[["boxicons.5fd50502.ttf","../node_modules/boxicons/fonts/boxicons.ttf"],"../node_modules/boxicons/fonts/boxicons.ttf"],"./..\\fonts\\boxicons.svg":[["boxicons.4de4a689.svg","../node_modules/boxicons/fonts/boxicons.svg"],"../node_modules/boxicons/fonts/boxicons.svg"],"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+require("./goods");
+
+require("./cart");
+
+require("boxicons/css/boxicons.min.css");
+},{"./goods":"js/goods.js","./cart":"js/cart.js","boxicons/css/boxicons.min.css":"../node_modules/boxicons/css/boxicons.min.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -573,5 +693,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/cart.js"], null)
-//# sourceMappingURL=/cart.c18a2f96.js.map
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","js/index.js"], null)
+//# sourceMappingURL=/js.00a46daa.js.map

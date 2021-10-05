@@ -1,0 +1,1 @@
+{"version":3,"sources":["js/order.js"],"names":["alert","localStorage","removeItem"],"mappings":"AAAAA,KAAK,CAAC,2BAAD,CAAL;AACAC,YAAY,CAACC,UAAb,CAAwB,MAAxB","file":"order.26c1b8da.js","sourceRoot":"..\\src","sourcesContent":["alert(\"Thank you for your order!\")\nlocalStorage.removeItem('cart');\n"]}

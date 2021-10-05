@@ -1,93 +1,238 @@
-$c-main: black;
-$b-main: lightgrey;
+@mixin section-title {
+    text-transform: uppercase;
+    font-size: 30px;
+    letter-spacing: 0.05em;
 
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Courier New', Courier, monospace;
-    color: $c-main;
 }
 
 body {
-    background-image: url("../pictures/background.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight:bold;
 }
 
-header, section, footer {
-    max-width: 1200px;
-    background-color: $b-main;
-    margin: 0 auto;
-}
-
-header{
-    padding-top: 20px;
-    border-top: 2px solid $c-main;
-    border-bottom: 2px solid $c-main;
-    height: 16rem;
-
-    h1{
-        display: block;
-    }
-
-
-}
-
-.top{
-        margin-left: 70%;
-    }
-
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 1rem 0;
-}
-
-.full-height {
-    min-height: 600px;
-    height: 100vh;
-}
-
-.flex {    
-    &-between {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &-center{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        gap:1rem;
-    }
-}
-
-.card{
+.header {
+    height: 100px;
+    background-color: #ffa500;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    border: 2px solid $c-main;
-    border-radius: 10px;
-    padding: 10px;
+    justify-content: space-around;
+
+    &__menu {
+        list-style-type: none;
+        display: flex;
+        align-items: center;
+        padding: 0;
+
+
+        &__item  {
+            padding-right: 20px;
+        }
+    }
+
+    &__icon {
+        height: 60px;
+        width: 60px;
+    }
+}
+
+.goods {
+    height: 1000px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 40px;
+    &__title {
+        @include section-title; 
+    }
+
+    &__container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: 30px;
+        grid-row-gap: 30px;
+        margin-top: 30px;
+        padding-bottom: 50px;
+
+
+        &__item {   
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            &__img {
+                height: 350px;
+                width: 300px;
+            }
+
+            &__name {
+                font-size: 20px;
+
+            }
+
+            &__price {
+                font-size: 20px;
+                margin-top: -10px;
+            }
+
+            &__button {
+                text-align: center;
+                width: 120px;
+                height: 35px;
+                border-radius: 45px;
+                font-size: 15px;
+                color: #ffa500;
+                background: white;
+                text-transform: uppercase;
+                font-family: 'Times New Roman', Times, serif;
+                font-weight:bold;
+                letter-spacing: 0.03em;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+                transition: .3s; 
+
+                &:hover {
+                    background: #005eff;
+                    box-shadow: 0 15px 20px rgba(70, 229, 157, .4);
+                    color: white;
+                }
+            }
+
+            
+        }
+    }
+}
+
+.cart {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    &__title {
+        @include section-title; 
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
     
-    img{
-        width: 200px;
-        height: 120px;
-        border-radius: .2rem;
-    }
-    h3,p,i,a{
-        padding: 0.5rem;
-    }
 
-    button{
-        background-color: $b-main;
-        color:$c-main;
-        padding: 0.25rem 0.5rem;
-        border: 1px solid $c-main;
-    }
+    &__list {
+        width: 500px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
 
+        &__item {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #0000005e;
+            position: relative;
+
+
+            &__img {
+                height: 100px;
+                width: 70px;
+            }
+
+            &__text {
+                display: flex;
+            }
+
+            &__name {
+                margin-right: 10px;
+                margin-left: 10px;
+                width: 260px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+            }
+
+            &__amount-cnt { 
+                position: absolute;
+                right: 30px;
+                display: flex;
+            }
+
+            &__amount { 
+                font-size: 30px;
+                padding: 0;
+                margin: 0;
+            }
+
+            &__remove {
+                width: 15px;
+                height: 30px;
+                margin: 5px;
+                margin-top: 0;
+                padding: 0;
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+            &__add {
+                width: 15px;
+                height: 30px;
+                margin: 5px;
+                margin-top: 0;
+                padding: 0;
+                font-size: 30px;
+                cursor: pointer;
+            }
+
+            &__delete {
+                position: absolute;
+                top: 2px;
+                right: 8px;
+                font-size: 22px;
+                font-family: monospace;
+                cursor: pointer;
+            }
+        }
+
+        &__total {
+            font-size: 20px;
+            letter-spacing: 0.02em;
+            margin-bottom: 15px;
+            display: flex;
+
+            &__text {
+                margin: 0;
+                margin-left: 5px;
+            }
+        }
+
+        &__button {
+            text-align: center;
+                width: 120px;
+                height: 35px;
+                border-radius: 45px;
+                font-size: 15px;
+                color: #ffa500;
+                background: white;
+                text-transform: uppercase;
+                font-family: 'Times New Roman', Times, serif;
+                font-weight:bold;
+                letter-spacing: 0.03em;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+                transition: .3s; 
+
+                &:hover {
+                    background: #005eff;
+                    box-shadow: 0 15px 20px rgba(60, 229, 157, .4);
+                    color: white;
+                }
+        }
+    }
+}
+
+.success {
+    &__text {
+        font-size: 45px;
+        width: 600px;
+        margin: 100px auto;
+        padding: 50px;
+        border: 1px solid #0000005e;
+    }
 }
