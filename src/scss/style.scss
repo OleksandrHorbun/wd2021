@@ -1,3 +1,10 @@
+$back: #ffa500;
+$button_back: #005eff;
+$white:white;
+$grey_bord: #0000005e;
+$blue_shadow: rgba(70, 229, 157, .5);
+$grey_shadow: rgba(0, 0, 0, .1);
+
 @mixin section-title {
     text-transform: uppercase;
     font-size: 30px;
@@ -13,8 +20,8 @@ body {
 }
 
 .header {
-    height: 100px;
-    background-color: #ffa500;
+    height: 120px;
+    background-color: $back;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -42,7 +49,7 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: 90px;
     &__title {
         @include section-title; 
     }
@@ -82,8 +89,8 @@ body {
                 height: 35px;
                 border-radius: 45px;
                 font-size: 15px;
-                color: #ffa500;
-                background: white;
+                color: $back;
+                background: $white;
                 text-transform: uppercase;
                 font-family: 'Times New Roman', Times, serif;
                 font-weight:bold;
@@ -92,9 +99,9 @@ body {
                 transition: .3s; 
 
                 &:hover {
-                    background: #005eff;
-                    box-shadow: 0 15px 20px rgba(70, 229, 157, .4);
-                    color: white;
+                    background: $button_back;
+                    box-shadow: 0 15px 20px $blue_shadow;
+                    color: $white;
                 }
             }
 
@@ -127,7 +134,7 @@ body {
             width: 100%;
             margin-bottom: 10px;
             padding: 10px;
-            border: 1px solid #0000005e;
+            border: 1px solid $grey_bord;
             position: relative;
 
 
@@ -147,6 +154,7 @@ body {
                 text-overflow: ellipsis;
                 overflow: hidden;
                 white-space: nowrap;
+                font-size: 20px;
             }
 
             &__amount-cnt { 
@@ -164,7 +172,7 @@ body {
             &__remove {
                 width: 15px;
                 height: 30px;
-                margin: 5px;
+                margin: 10px;
                 margin-top: 0;
                 padding: 0;
                 font-size: 30px;
@@ -174,7 +182,7 @@ body {
             &__add {
                 width: 15px;
                 height: 30px;
-                margin: 5px;
+                margin: 10px;
                 margin-top: 0;
                 padding: 0;
                 font-size: 30px;
@@ -193,7 +201,7 @@ body {
 
         &__total {
             font-size: 20px;
-            letter-spacing: 0.02em;
+            letter-spacing: 0.05em;
             margin-bottom: 15px;
             display: flex;
 
@@ -209,8 +217,8 @@ body {
                 height: 35px;
                 border-radius: 45px;
                 font-size: 15px;
-                color: #ffa500;
-                background: white;
+                color: $back;
+                background: $white;
                 text-transform: uppercase;
                 font-family: 'Times New Roman', Times, serif;
                 font-weight:bold;
@@ -219,9 +227,9 @@ body {
                 transition: .3s; 
 
                 &:hover {
-                    background: #005eff;
-                    box-shadow: 0 15px 20px rgba(60, 229, 157, .4);
-                    color: white;
+                    background: $button_back;
+                    box-shadow: 0 15px 20px $blue_shadow;
+                    color: $white;
                 }
         }
     }
@@ -233,6 +241,6 @@ body {
         width: 600px;
         margin: 100px auto;
         padding: 50px;
-        border: 1px solid #0000005e;
+        border: 1px solid $grey_bord;
     }
 }

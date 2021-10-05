@@ -6,7 +6,7 @@ body {
 }
 
 .header {
-  height: 100px;
+  height: 120px;
   background-color: #ffa500;
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 40px;
+  margin-top: 90px;
 }
 .goods__title {
   text-transform: uppercase;
@@ -79,7 +79,7 @@ body {
 }
 .goods__container__item__button:hover {
   background: #005eff;
-  box-shadow: 0 15px 20px rgba(70, 229, 157, 0.4);
+  box-shadow: 0 15px 20px rgba(70, 229, 157, 0.5);
   color: white;
 }
 
@@ -124,6 +124,7 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  font-size: 20px;
 }
 .cart__list__item__amount-cnt {
   position: absolute;
@@ -138,7 +139,7 @@ body {
 .cart__list__item__remove {
   width: 15px;
   height: 30px;
-  margin: 5px;
+  margin: 10px;
   margin-top: 0;
   padding: 0;
   font-size: 30px;
@@ -147,7 +148,7 @@ body {
 .cart__list__item__add {
   width: 15px;
   height: 30px;
-  margin: 5px;
+  margin: 10px;
   margin-top: 0;
   padding: 0;
   font-size: 30px;
@@ -163,7 +164,7 @@ body {
 }
 .cart__list__total {
   font-size: 20px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.05em;
   margin-bottom: 15px;
   display: flex;
 }
@@ -188,7 +189,7 @@ body {
 }
 .cart__list__button:hover {
   background: #005eff;
-  box-shadow: 0 15px 20px rgba(60, 229, 157, 0.4);
+  box-shadow: 0 15px 20px rgba(70, 229, 157, 0.5);
   color: white;
 }
 
