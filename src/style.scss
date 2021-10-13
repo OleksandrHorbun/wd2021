@@ -1,0 +1,59 @@
+$c-main: rgb(255, 166, 0);
+$b-main: lightgrey;
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+    color: $c-main;
+    
+}
+
+body {
+    p, h2, button, textarea{
+        margin-left: 5%;
+        margin-bottom: 4px;
+    }
+    background-image: url("/img/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    &_container {
+        max-width: 950px;
+        margin: 0 auto;
+        padding: 1rem 1rem;
+    }
+}
+
+
+header,
+section {
+    max-width: 1000px;
+    background-color: $b-main;
+    margin: 0 auto;
+}
+
+header{
+    padding-top: 10px;
+    border-bottom: 2px solid $c-main;
+
+    h1{
+        display: block;
+        text-align: center;
+    }
+}
+
+footer{
+    padding-top: 10px;
+    border-bottom: 2px solid $c-main;
+    margin: 0 10px;
+}
+
+
+
+.full-height {
+    min-height: 100px;
+    height: 300px;
+}
+.header-height {
+    height: 6rem;
+}

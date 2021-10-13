@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Something",
+        "price":"20,50$",
+        "count":"10"
+    },
+    {
+        "name": "Sonething a bit simplier&cheaper",
+        "price":"15,99$",
+        "count":"21"
+    },
+    {
+        "name": "Something better",
+        "price":"40,99$",
+        "count":"4"
+    }
+]
