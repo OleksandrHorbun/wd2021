@@ -1,5 +1,5 @@
 $c-main: rgb(255, 166, 0);
-$b-main: lightgrey;
+$b-main: rgba(0, 0, 0, 0.659);
 
 * {
     margin: 0;
@@ -13,6 +13,14 @@ body {
     p, h2, button, textarea{
         margin-left: 5%;
         margin-bottom: 4px;
+    }
+    textarea{
+        margin-top: 1em;
+        min-height: 50px;
+        height: 100px;
+        max-height: 110px;
+        min-width: 50px;
+        max-width: 500px;
     }
     background-image: url("/img/background.jpg");
     background-repeat: no-repeat;
